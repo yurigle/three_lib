@@ -28,11 +28,15 @@
             // 장면에 cube를 추가함
 
             camera.position.z = 5;
+            const controls = new OrbitControls(camera, renderer.domElement);
+            controls.minDistance = 1;
+            controls.maxDistance = 500;
 
-            function animate() {
+            const animate = function () {
                 requestAnimationFrame( animate );
                 cube.rotation.x += 0.01;
                 cube.rotation.y += 0.01;
+                controls.update();
                 renderer.render( scene, camera );
             }
             animate();
