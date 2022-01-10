@@ -62,7 +62,7 @@
             ctx.beginPath();
             ctx.arc(50,50,25,0,2*Math.PI);
             ctx.fill();
-            let img = canvas.toDataURL("image/png");
+            let img = canvas.toDataURL("image/png"); 
             const star = loader.load(img);
             const particlesmaterial = new THREE.PointsMaterial({
                 size: 0.01,
