@@ -106,9 +106,7 @@
 
             const animate = () => {
                 window.requestAnimationFrame( animate );
-                // cube.rotation.x += 0.01;
-                // cube.rotation.y += 0.01;
-                // controls.update();
+                
                 const elapsedTime = clock.getElapsedTime();
                 sphere.rotation.y = 0.5 * elapsedTime;
                 particlesMesh.rotation.y = -1 * (elapsedTime * 0.1);  
