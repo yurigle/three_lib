@@ -31,7 +31,7 @@
             
             document.body.appendChild(renderer.domElement);
 
-            window.addEventListener("resize", ()=> { 
+            window.addEventListener("resize", ()=> { // 반응형 적용
                 sizes.width = window.innerWidth;
                 sizes.height = window.innerHeight;
 
@@ -43,18 +43,18 @@
             
             });
 
-            const geometry = new THREE.SphereGeometry(0.7,64,32,8,7);
-            const material = new THREE.PointsMaterial({
+            const geometry = new THREE.SphereGeometry(0.7,64,32,8,7); // 원형 크기, 모양 설정 가능
+            const material = new THREE.PointsMaterial({ // 점,선,면 중 점으로 표현
                 size: 0.005,
                 color: 0x00ff80,
             });  
 
-            const sphere = new THREE.Points( geometry, material );
+            const sphere = new THREE.Points( geometry, material ); // 원형 만든 것
 
             scene.add(sphere); // 원형 3d 추가
 
-            const particlesGeometry = new THREE.BufferGeometry();
-            const loader = new THREE.TextureLoader();
+            const particlesGeometry = new THREE.BufferGeometry(); // 사용자 정의 모형을 만들 수 있는 함수
+            const loader = new THREE.TextureLoader(); 
             let canvas = document.createElement("canvas");
             let ctx = canvas.getContext("2d");
             canvas.height = 100;
@@ -64,8 +64,8 @@
             ctx.arc(50,50,25,0,2*Math.PI);
             ctx.fill();
             let img = canvas.toDataURL("image/png"); 
-            const star = loader.load(img);
-            const particlesmaterial = new THREE.PointsMaterial({
+            const star = loader.load(img); 
+            const particlesmaterial = new THREE.PointsMaterial({  
                 size: 0.01,
                 map: star,
                 transparent: true,
@@ -75,15 +75,15 @@
             const posArray = new Float32Array(PariclesCnt * 3); 
 
             for(let i =0; i<PariclesCnt * 3; i++) {
-                posArray[i] = (Math.random() -0.5) * (Math.random() * 5);
-            }
+                posArray[i] = (Math.random() -0.5) * (Math.random() * 5); 
+            } // 별들이 모이지 않도록 하는 코드
 
             particlesGeometry.setAttribute(
                 "position",
                 new THREE.BufferAttribute(posArray,3)
             );
 
-            const particlesMesh = new THREE.Points(particlesGeometry, particlesmaterial);
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesmaterial); // canvas로 만든 별 바탕 이미지로 변환 후 사용자 정의 모형의 질감(?) 적용
             scene.add(particlesMesh);
             
             document.addEventListener("mousemove", animateParticles);
@@ -99,13 +99,13 @@
 
             const clock = new THREE.Clock();
 
-            
+            // 원형을 마우스로 클릭하면서 돌리고 싶기 때문에 OrbitControls 추가
             const controls = new OrbitControls(camera, renderer.domElement);
             controls.minDistance = 1;
             controls.maxDistance = 500;
 
             const animate = () => {
-                window.requestAnimationFrame( animate );
+                window.requestAnimationFrame( animate ); // 다음 애니메이션을 유연하게 이어나가는
                 
                 const elapsedTime = clock.getElapsedTime();
                 sphere.rotation.y = 0.5 * elapsedTime;
