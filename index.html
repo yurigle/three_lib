@@ -100,16 +100,17 @@
             const clock = new THREE.Clock();
 
             
-            // const controls = new OrbitControls(camera, renderer.domElement);
-            // controls.minDistance = 1;
-            // controls.maxDistance = 500;
+            const controls = new OrbitControls(camera, renderer.domElement);
+            controls.minDistance = 1;
+            controls.maxDistance = 500;
 
             const animate = () => {
                 window.requestAnimationFrame( animate );
                 
                 const elapsedTime = clock.getElapsedTime();
                 sphere.rotation.y = 0.5 * elapsedTime;
-                particlesMesh.rotation.y = -1 * (elapsedTime * 0.1);  
+                particlesMesh.rotation.y = -1 * (elapsedTime * 0.1);
+                controls.update();  
 
                 if(mouseX > 0) {
                     particlesMesh.rotation.x = -mouseY * (elapsedTime * 0.00008);
