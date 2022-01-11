@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8">
+        <title>3D Globe 만들기</title>
+        <style>
+            body { margin: 0; }
+            canvas { display: block; }
+        </style>
+    </head>
+    <body>
+        <script type="module">
+            import * as THREE from "https://unpkg.com/three@0.126.1/build/three.module.js"; 
+            import { OrbitControls } from "https://unpkg.com/three@0.126.1/examples/jsm/controls/OrbitControls.js";
+            
+            const scene = new THREE.Scene();
+            const sizes = {
+                width: window.innerWidth,
+                height: window.innerHeight, 
+            };
+            const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height,0.1,1000);
+
+            renderer = new THREE.WebGLRenderer();
+            renderer.setClearColor(0x000000,1.0);
+            renderer.setSize(sizes.width,sizes.height);
+            renderer.shadowMapEnabled = true;
+
+             //sphere
+            var sphereGeometry = new THREE.SphereGeometry(20, 20, 20);
+            var material = new THREE.MeshLambertMaterial({color: 0x1E60EE, transparent: true});
+            material.opacity = 0.6;
+            var sphere = new THREE.Mesh(sphereGeometry, material);
+            scene.add(sphere);
+
+
+            // add spotlight for the shadows
+            var spotLight = new THREE.SpotLight(0xffffff);
+            spotLight.position.set(500, 500, 1000);
+            spotLight.shadowCameraNear = 20;
+            spotLight.shadowCameraFar = 100;
+            spotLight.castShadow = true;
+
+            scene.add(spotLight);
+
+            document.body.appendChild(renderer.domElement);
+        </script>
+    </body>
+</html>
