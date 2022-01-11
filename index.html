@@ -109,8 +109,8 @@
                 
                 const elapsedTime = clock.getElapsedTime();
                 sphere.rotation.y = 0.5 * elapsedTime;
-                particlesMesh.rotation.y = -1 * (elapsedTime * 0.1);
-                controls.update();  
+                controls.update();
+                particlesMesh.rotation.y = -1 * (elapsedTime * 0.1);  
 
                 if(mouseX > 0) {
                     particlesMesh.rotation.x = -mouseY * (elapsedTime * 0.00008);
